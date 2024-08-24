@@ -48,20 +48,20 @@ the [kool repo].
 - [Mesh Simplification]  Interactive mesh simplification demo (based on traditional [error-quadrics](https://www.cs.cmu.edu/~./garland/Papers/quadrics.pdf))
 
 [kool repo]: https://github.com/kool-engine/kool
-[Island]: https://kool-engine.github.io/kool/demos/?demo=phys-terrain
-[Physics - Ragdoll]: https://kool-engine.github.io/kool/demos/?demo=phys-ragdoll
-[Physics - Vehicle]: https://kool-engine.github.io/kool/demos/?demo=phys-vehicle
-[Physics - Joints]: https://kool-engine.github.io/kool/demos/?demo=phys-joints
-[Physics - Collision]: https://kool-engine.github.io/kool/demos/?demo=physics
-[Embedded UI]: https://kool-engine.github.io/kool/demos/?demo=ui
-[Particles]: https://kool-engine.github.io/kool/demos/?demo=bees
-[Fluffy Bunny]: https://kool-engine.github.io/kool/demos/?demo=shell
-[Creative Coding]: https://kool-engine.github.io/kool/demos/?demo=creative-coding
-[Procedural Geometry]: https://kool-engine.github.io/kool/demos/?demo=procedural
-[glTF Models]: https://kool-engine.github.io/kool/demos/?demo=gltf
-[Deferred Shading]: https://kool-engine.github.io/kool/demos/?demo=deferred
-[Screen-space Ambient Occlusion]: https://kool-engine.github.io/kool/demos/?demo=ao
-[Screen-space Reflections]: https://kool-engine.github.io/kool/demos/?demo=ssr
-[Physical Based Rendering]: https://kool-engine.github.io/kool/demos/?demo=pbr
-[Instanced / LOD Drawing]: https://kool-engine.github.io/kool/demos/?demo=instance
-[Mesh Simplification]: https://kool-engine.github.io/kool/demos/?demo=simplification
+[Island]: https://kool-engine.github.io/live/demos/?demo=phys-terrain
+[Physics - Ragdoll]: https://kool-engine.github.io/live/demos/?demo=phys-ragdoll
+[Physics - Vehicle]: https://kool-engine.github.io/live/demos/?demo=phys-vehicle
+[Physics - Joints]: https://kool-engine.github.io/live/demos/?demo=phys-joints
+[Physics - Collision]: https://kool-engine.github.io/live/demos/?demo=physics
+[Embedded UI]: https://kool-engine.github.io/live/demos/?demo=ui
+[Particles]: https://kool-engine.github.io/live/demos/?demo=bees
+[Fluffy Bunny]: https://kool-engine.github.io/live/demos/?demo=shell
+[Creative Coding]: https://kool-engine.github.io/live/demos/?demo=creative-coding
+[Procedural Geometry]: https://kool-engine.github.io/live/demos/?demo=procedural
+[glTF Models]: https://kool-engine.github.io/live/demos/?demo=gltf
+[Deferred Shading]: https://kool-engine.github.io/live/demos/?demo=deferred
+[Screen-space Ambient Occlusion]: https://kool-engine.github.io/live/demos/?demo=ao
+[Screen-space Reflections]: https://kool-engine.github.io/live/demos/?demo=ssr
+[Physical Based Rendering]: https://kool-engine.github.io/live/demos/?demo=pbr
+[Instanced / LOD Drawing]: https://kool-engine.github.io/live/demos/?demo=instance
+[Mesh Simplification]: https://kool-engine.github.io/live/demos/?demo=simplification
