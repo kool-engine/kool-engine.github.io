@@ -10,21 +10,154 @@
             padding: 0;
             margin: 0;
             overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         canvas {
             width: 100vw;
             height: 100vh;
             display: block;
         }
+
+        /* Loading Screen Styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            //background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #202020 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            width: 200px;
+            margin-bottom: 2rem;
+        }
+
+        .loading-text {
+            color: #ffffff;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-container {
+            width: 400px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #9C27B0, #E1BEE7);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .progress-text {
+            color: #ffffff;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            min-height: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .progress-container {
+                width: 80vw;
+            }
+            .loading-logo {
+                width: 100px;
+            }
+            .loading-text {
+                font-size: 1rem;
+                text-align: center;
+                padding: 0 1rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-logo"><img src="assets/kool-logo.svg" alt="kool-logo" width="100%"></div>
+        <div class="loading-text">kool</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Initializing...</div>
+    </div>
+
     <!-- tabindex is required to make canvas focusable, needed to get per-canvas key events -->
     <canvas id="glCanvas" tabindex="0">
         Your browser doesn't appear to support the
         <code>&lt;canvas&gt;</code> element.
     </canvas>
 
-    <script src="kool-demo.js"></script>
+    <script type="module">
+        // Loading progress management
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const loadingScreen = document.getElementById('loading-screen');
+
+        function updateProgress(progress, text) {
+            progressBar.style.width = (progress * 100) + '%';
+            progressText.textContent = text;
+        }
+
+        function hideLoadingScreen() {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+        }
+
+        async function fetchBlock(url, text, startProgress, stepProgress) {
+            let response = await fetch(url);
+            const reader = response.body.getReader();
+            const contentLength = +response.headers.get('Content-Length');
+            let receivedLength = 0;
+            while(true) {
+                const {done, value} = await reader.read();
+                if (done) {
+                    break;
+                }
+                receivedLength += value.length;
+                const progress = startProgress + (receivedLength / contentLength) * stepProgress;
+                updateProgress(progress, text)
+            }
+        }
+
+        updateProgress(0, 'Loading kool...');
+
+        // Fetch essential files tracking progress before actually loading them - will be loaded from cache afterwards
+        await fetchBlock('kool-demo.js', 'Loading kool...', 0, 0.4)
+        await fetchBlock('assets/fonts/fira-sans-regular.png', 'Loading fonts...', 0.4, 0.6)
+        await fetchBlock('4ab48fc16bcbc6611bb2.wasm', 'Loading PhysX...', 0.6, 1.0)
+
+        const script = document.createElement('script');
+        script.src = 'kool-demo.js';
+        script.onload = function() {
+            hideLoadingScreen();
+        };
+        script.onerror = function() {
+            updateProgress(0, 'Error loading kool');
+            progressText.style.color = '#f44336';
+        };
+        document.head.appendChild(script);
+    </script>
 </body>
 </html>
